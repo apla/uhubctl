@@ -1,0 +1,18 @@
+# idea from https://github.com/analogdevicesinc/libsmu/blob/master/appveyor.yml
+os: Visual Studio 2015
+clone_depth: 1
+
+configuration:
+  - Release
+  - Debug
+
+install:
+  - git clone https://github.com/libusb/libusb.git "C:\libusb"
+
+build_script:
+  - ps: pushd "C:\libusb"
+  - msbuild msvc\libusb_2015.sln /p:Platform=Win32 /p:Configuration=%CONFIGURATION% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+  - msbuild msvc\libusb_2015.sln /p:Platform=x64 /p:Configuration=%CONFIGURATION% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+  - ps: popd
+  - dir
+  - make
