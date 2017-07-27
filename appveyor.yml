@@ -10,6 +10,7 @@ install:
   - git clone https://github.com/libusb/libusb.git "C:\libusb"
 
 build_script:
+# TODO: check for static build
   - ps: pushd "C:\libusb"
   - msbuild msvc\libusb_2015.sln /p:Platform=Win32 /p:Configuration=%CONFIGURATION% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
   - msbuild msvc\libusb_2015.sln /p:Platform=x64 /p:Configuration=%CONFIGURATION% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
