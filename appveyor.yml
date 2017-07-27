@@ -20,7 +20,29 @@ build_script:
   - msbuild uhubctl.vcxproj /p:Platform=Win32 /p:Configuration=%CONFIGURATION% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
   - msbuild uhubctl.vcxproj /p:Platform=x64 /p:Configuration=%CONFIGURATION% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
   - dir
-  - dir Win32\Release\
-  - dir Win32\Debug\
-  - dir x64\Release\
-  - dir x64\Debug\
+  - dir Win32\*
+  - dir x64\*
+
+# https://www.appveyor.com/docs/packaging-artifacts/
+artifacts:
+  - path: Win32/Release/uhubctl.exe
+    name: uhubctl-win32
+    type: zip
+
+  - path: x64/Release/uhubctl.exe
+    name: uhubctl-x64
+    type: zip
+
+# https://www.appveyor.com/docs/deployment/github/
+# deploy:
+  # release: uhubctl-v$(appveyor_build_version)
+  # description: 'uhubctl: new version'
+  # provider: GitHub
+  # auth_token:
+  #  secure: <your encrypted token> # your encrypted token from GitHub
+  # artifact: /.*\.nupkg/            # upload all NuGet packages to release assets
+  # draft: false
+  # prerelease: false
+  # on:
+  #  branch: master                 # release from master branch only
+  # appveyor_repo_tag: true        # deploy on tag push only
