@@ -7,11 +7,11 @@ configuration:
   - Debug
 
 install:
-  - git clone https://github.com/skandhurkat/Getopt-for-Visual-Studio "C:\Getopt-for-Visual-Studio"
-  - git clone https://github.com/libusb/libusb.git "C:\libusb"
+  - git clone https://github.com/skandhurkat/Getopt-for-Visual-Studio "C:\projects\Getopt-for-Visual-Studio"
+  - git clone https://github.com/libusb/libusb.git "C:\projects\libusb"
 
 build_script:
-  - ps: pushd "C:\libusb"
+  - ps: pushd "C:\projects\libusb"
   - msbuild msvc\libusb_2015.sln /p:Platform=Win32 /p:Configuration=%CONFIGURATION% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
   - msbuild msvc\libusb_2015.sln /p:Platform=x64 /p:Configuration=%CONFIGURATION% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
   - ps: popd
@@ -20,5 +20,7 @@ build_script:
   - msbuild uhubctl.vcxproj /p:Platform=Win32 /p:Configuration=%CONFIGURATION% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
   - msbuild uhubctl.vcxproj /p:Platform=x64 /p:Configuration=%CONFIGURATION% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
   - dir
-  - dir Win32/Release/
-  - dir Win32/Debug/
+  - dir Win32\Release\
+  - dir Win32\Debug\
+  - dir x64\Release\
+  - dir x64\Debug\
