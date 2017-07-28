@@ -4,7 +4,7 @@ clone_depth: 1
 
 configuration:
   - Release
-  - Debug
+#  - Debug
 
 install:
   - git clone https://github.com/skandhurkat/Getopt-for-Visual-Studio "C:\projects\Getopt-for-Visual-Studio"
